@@ -1,0 +1,113 @@
+//BASIC_LCD_DISPLAY_STRING
+#include<LiquidCrystal.h>
+int rs=7;
+int en=8;
+int d4=9;
+int d5=10;
+int d6=11;
+int d7=12;
+LiquidCrystal lcd(rs,en,d4,d5,d6,d7);
+void setup() {
+  // put your setup code here, to run once:
+lcd.begin(16,2);
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+lcd.setCursor(0,0);
+lcd.print("HELLO WORLD");
+lcd.setCursor(0,1);
+lcd.print("MY NAME IS ABHI");
+}
+
+
+//BASIC_LCD_Counting
+#include<LiquidCrystal.h>
+int rs=7;
+int en=8;
+int d4=9;
+int d5=10;
+int d6=11;
+int d7=12;
+LiquidCrystal lcd(rs,en,d4,d5,d6,d7);
+void setup() {
+  // put your setup code here, to run once:
+lcd.begin(16,2);
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+lcd.setCursor(0,0);
+lcd.print("Watch me Count");
+for(int j=1;j<=10;j=j+1){
+  lcd.setCursor(0,1);
+  lcd.print(j);
+  delay(500);
+}
+lcd.clear();
+}
+
+
+//SIMPLE_CALCULATOR_LCD
+#include<LiquidCrystal.h>
+int rs=7;
+int en=8;
+int d4=9;
+int d5=10;
+int d6=11;
+int d7=12;
+LiquidCrystal lcd(rs,en,d4,d5,d6,d7);
+float firstnum;
+float secnum;
+float answer;
+
+String op;
+void setup() {
+  // put your setup code here, to run once:
+Serial.begin(9600);
+lcd.begin(16,2);
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+lcd.clear();
+lcd.setCursor(0,0);
+lcd.print("input 1st Number: ");
+while(Serial.available()==0){
+
+}
+firstnum=Serial.parseFloat();
+lcd.clear();
+lcd.setCursor(0,0);
+lcd.print("input 2nd Number: ");
+while(Serial.available()==0){
+
+}
+secnum=Serial.parseFloat();
+lcd.clear();
+lcd.setCursor(0,0);
+lcd.print("input the operator: ");
+while(Serial.available()==0){
+
+}
+op=Serial.readString();
+if(op=="+"){
+  answer=firstnum+secnum;
+}
+if(op=="-"){
+  answer=firstnum-secnum;
+}
+if(op=="*"){
+  answer=firstnum*secnum;
+}
+if(op=="/"){
+  answer=firstnum/secnum;
+}
+lcd.clear();
+lcd.setCursor(0,0);
+lcd.print(firstnum);
+lcd.print(op);
+lcd.print(secnum);
+lcd.print(" = ");
+lcd.print(answer);
+}
